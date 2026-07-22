@@ -73,6 +73,9 @@ jobs:
         run: |
           sudo -E apt -yqq purge firefox
           sudo -E apt -yqq update
+          sudo -E apt -yqq install nala
+          sudo nala fetch --auto -y
+
           sudo -E apt -yqq full-upgrade
           sudo -E apt -yqq autoremove --purge
           sudo -E apt -yqq autoclean
@@ -98,15 +101,16 @@ jobs:
 
       - name: Clone Code
         run: |
-          git clone --depth=1 --single-branch --branch $WRT_BRANCH $WRT_REPO ./wrt/
+          git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./wrt/
 
-          cd ./wrt/ && echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
+          cd ./wrt/ && git checkout a188e3ba10ff8654fdfd99457f756c70c5534d7a
+          echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
 
           # GitHub Action 移除国内下载源
-          PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
-          if [ -f "$PROJECT_MIRRORS_FILE" ]; then
-            sed -i '/.cn\//d; /tencent/d; /aliyun/d' "$PROJECT_MIRRORS_FILE"
-          fi
+          #PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
+          #if [ -f "$PROJECT_MIRRORS_FILE" ]; then
+          #  sed -i '/.cn\//d; /tencent/d; /aliyun/d' "$PROJECT_MIRRORS_FILE"
+          #fi
 
       - name: Check Scripts
         run: |
@@ -181,7 +185,7 @@ jobs:
         run: |
           cd ./wrt/
 
-          make download -j$(nproc)
+          make download -j$(nproc) || make download -j1 V=s
 
       - name: Compile Firmware
         if: env.WRT_TEST != 'true'
@@ -229,7 +233,7 @@ jobs:
       - name: Release Firmware
         uses: softprops/action-gh-release@master
         with:
-          tag_name: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_BRANCH}}-${{env.WRT_DATE}}
+          tag_name: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_HASH}}-${{env.WRT_KVER}}
           files: ./wrt/upload/*.*
           body: |
             这是个平台固件包，内含多个设备！
@@ -237,6 +241,7 @@ jobs:
             不要问，刷就完事了！
 
             全系带开源硬件加速，别问了！
+            (非最新编译,仅用于测试.只编译kernel更新前)
 
             源码：${{env.WRT_REPO}}
             分支：${{env.WRT_BRANCH}}
