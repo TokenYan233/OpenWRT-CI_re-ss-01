@@ -233,7 +233,7 @@ jobs:
       - name: Release Firmware
         uses: softprops/action-gh-release@master
         with:
-          tag_name: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_HASH}}-${{env.WRT_KVER}}
+          tag_name: ${{env.WRT_CONFIG}}-${{env.WRT_KVER}}-${{env.WRT_INFO}}-${{env.WRT_HASH}}
           files: ./wrt/upload/*.*
           body: |
             这是个平台固件包，内含多个设备！
@@ -241,7 +241,7 @@ jobs:
             不要问，刷就完事了！
 
             全系带开源硬件加速，别问了！
-            (非最新编译,仅用于测试.只编译kernel更新前)
+            !(非最新编译,仅用于测试.只编译kernel更新前)
 
             源码：${{env.WRT_REPO}}
             分支：${{env.WRT_BRANCH}}
