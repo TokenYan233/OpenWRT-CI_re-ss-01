@@ -103,7 +103,7 @@ jobs:
         run: |
           git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./wrt/
 
-          cd ./wrt/ && git checkout 42a1f64b5dbd2a99d05daca94ae5a87eebff59b4
+          cd ./wrt/ && git checkout 9e08f0c3cf44c6681d7f9b7730adf3fad8db62a5
           echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
 
           # GitHub Action 移除国内下载源
@@ -242,7 +242,7 @@ jobs:
 
             全系带开源硬件加速，别问了！
             (非最新编译,仅用于测试.只选kernel更新前编译)
-            42a1f64b5dbd2a99d05daca94ae5a87eebff59b4
+            9e08f0c3cf44c6681d7f9b7730adf3fad8db62a5
 
             源码：${{env.WRT_REPO}}
             分支：${{env.WRT_BRANCH}}
