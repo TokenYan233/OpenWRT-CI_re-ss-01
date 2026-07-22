@@ -1,3 +1,5 @@
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/TokenYan233/OpenWRT-CI_re-ss-01?style=for-the-badge&label=Download)](https://github.com/TokenYan233/OpenWRT-CI_re-ss-01/releases/latest)
+
 # 高质量<免费>交流群
 
 点击链接加入群聊【IPQ技术讨论群】：https://qm.qq.com/q/v7nMhzB4oU
