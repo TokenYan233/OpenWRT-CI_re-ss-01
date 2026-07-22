@@ -241,7 +241,8 @@ jobs:
             不要问，刷就完事了！
 
             全系带开源硬件加速，别问了！
-            !(非最新编译,仅用于测试.只选编译kernel更新前提交)
+            (非最新编译,仅用于测试.只选kernel更新前编译)
+            42a1f64b5dbd2a99d05daca94ae5a87eebff59b4
 
             源码：${{env.WRT_REPO}}
             分支：${{env.WRT_BRANCH}}
