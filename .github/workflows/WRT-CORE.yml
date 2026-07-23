@@ -156,30 +156,22 @@ jobs:
         run: |
           cd ./wrt/
 
-          ./scripts/feeds update -a
-          
-          # 2. 魔法回档：先取回完整历史，再拨回 5 月 20 日
+          ./scripts/feeds update -a || true
+
           for dir in feeds/*; do
             if [ -d "$dir/.git" ]; then
-              echo "========== 正在处理 $dir =========="
               cd "$dir"
-              
-              # 关键修复：如果是浅克隆，必须先拉取所有历史记录，否则无法穿越！
+
               if [ -f .git/shallow ]; then
-                echo "检测到浅克隆，正在获取完整历史..."
                 git fetch --unshallow
               fi
-              
-              # 寻找 2026-05-20 23:59 之前的最后一次提交
+
               target_hash=$(git rev-list -n 1 --before="2026-05-20 23:59" HEAD)
-              
+
               if [ -n "$target_hash" ]; then
-                echo "找到 5月20日 历史节点: $target_hash，执行回退！"
                 git checkout "$target_hash"
               else
-                echo "警告：未找到对应的历史节点！"
               fi
-              
               cd ../..
             fi
           done
