@@ -157,6 +157,14 @@ jobs:
           cd ./wrt/
 
           ./scripts/feeds update -a
+
+          cd feeds/packages
+          MAX_PATCH=$(git log -p -- net/sing-box/Makefile | grep -o 'PKG_VERSION:=1.12.[0-9]*' | cut -d. -f3 | sort -n | tail -n 1)
+          [ -n "$MAX_PATCH" ] && SB_HASH=$(git log -S "PKG_VERSION:=1.12.${MAX_PATCH}" --format="%H" -n 1 -- net/sing-box) || true
+          [ -n "$SB_HASH" ] && git checkout "$SB_HASH" -- net/sing-box || true
+          cd ../..
+          ./scripts/feeds update -i
+          
           ./scripts/feeds install -a
 
       - name: Custom Packages
