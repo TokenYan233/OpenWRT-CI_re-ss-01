@@ -157,24 +157,27 @@ jobs:
           cd ./wrt/
 
           ./scripts/feeds update -a || true
-
+          
+          echo "2. 开始魔法回档..."
           for dir in feeds/*; do
-            if [ -d "$dir/.git" ]; then
-              cd "$dir"
-
-              if [ -f .git/shallow ]; then
-                git fetch --unshallow
-              fi
-
-              target_hash=$(git rev-list -n 1 --before="2026-05-20 23:59" HEAD)
-
-              if [ -n "$target_hash" ]; then
-                git checkout "$target_hash"
-              else
-              fi
-              cd ../..
-            fi
+            # 如果不是git目录就直接跳过（单行短路语法，告别 if fi）
+            [ ! -d "$dir/.git" ] && continue
+            
+            echo "========== 正在处理 $dir =========="
+            cd "$dir"
+            
+            # 无脑解除浅克隆，报错也不怕
+            git fetch --unshallow 2>/dev/null || true
+            
+            # 获取 5月19日 的节点并直接强切
+            target_hash=$(git rev-list -n 1 --before="2026-05-19 23:59" HEAD)
+            [ -n "$target_hash" ] && git checkout "$target_hash" && echo "切回成功: $target_hash"
+            
+            cd ../..
           done
+
+          echo "3. 重新生成 5月19日 的完美兼容索引..."
+          ./scripts/feeds update -i
 
           ./scripts/feeds install -a
 
