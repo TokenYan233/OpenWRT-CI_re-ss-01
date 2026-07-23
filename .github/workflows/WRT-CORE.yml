@@ -157,6 +157,17 @@ jobs:
           cd ./wrt/
 
           ./scripts/feeds update -a
+          for dir in feeds/*; do
+          if [ -d "$dir/.git" ]; then
+          echo "Rolling back $dir to May 20, 2026..."
+          cd "$dir"
+          target_hash=$(git rev-list -n 1 --before="2026-05-20 23:59" HEAD)
+          if [ -n "$target_hash" ]; then
+          git checkout "$target_hash"
+          fi
+          cd ../..
+          fi
+          done
           ./scripts/feeds install -a
 
       - name: Custom Packages
