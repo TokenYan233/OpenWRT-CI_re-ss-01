@@ -1,11 +1,8 @@
 
 # [![GitHub release (latest by date)](https://img.shields.io/github/v/release/TokenYan233/OpenWRT-CI_JDC_RE-SS-01?style=for-the-badge&label=Download)](https://github.com/TokenYan233/OpenWRT-CI_JDC_RE-SS-01/releases/latest)
 
-⚓ Compiled at a pre-update node with an older Linux Kernel.
+🛖 Compiled at a pre-update node with an older Linux Kernel.
 
-🛖 HomeProxy feeds uses the default ImmortalWrt package.
-
-🪂 Add vlmcsd nikki LuCI app package.
 #
 
 # 高质量<付费>中转站
