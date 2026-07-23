@@ -164,8 +164,8 @@ jobs:
           cd "$dir"
           # 解除浅克隆获取完整历史
           git fetch --unshallow 2>/dev/null || true
-          # 获取5月20日的节点并强切
-          target_hash=$(git rev-list -n 1 --before="2026-05-20 23:59" HEAD)
+          # 获取5月26日的节点并强切
+          target_hash=$(git rev-list -n 1 --before="2026-05-26 23:59" HEAD)
           [ -n "$target_hash" ] && git checkout "$target_hash"
           cd ../..
           done
