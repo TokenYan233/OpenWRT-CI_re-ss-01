@@ -85,6 +85,12 @@ UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
 #更新软件包版本
 UPDATE_VERSION() {
 	local PKG_NAME=$1
+
+	if [[ "$PKG_NAME" == "sing-box" ]]; then
+	echo -e "\n$PKG_NAME is locked, skipping update."
+	return
+	fi
+
 	local PKG_MARK=${2:-false}
 	local PKG_FILES=$(find ./ ../feeds/packages/ -maxdepth 3 -type f -wholename "*/$PKG_NAME/Makefile")
 
