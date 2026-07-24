@@ -1,14 +1,13 @@
-#
 
-🍝 Release list Kernel Ver.
-
-🪟 Add vlmcsd LuCI app package.
-
-🚧 sing-box locked 1.12.xx skipping update.
+🎣 Compiled at a pre-update node with an older Linux Kernel.
 
 🛖 HomeProxy uses the default ImmortalWrt package.
 
-🎣 Compiled at a pre-update node with an older Linux Kernel.
+🚧 sing-box locked 1.12.xx skipping update.
+
+🪟 Add vlmcsd LuCI app package.
+
+🍝 Release list Kernel Ver.
 
 # [![GitHub release (latest by date)](https://img.shields.io/github/v/release/TokenYan233/OpenWRT-CI_JDC_RE-SS-01?style=for-the-badge&label=Download)](https://github.com/TokenYan233/OpenWRT-CI_JDC_RE-SS-01/releases/latest)
 
